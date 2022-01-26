@@ -19,44 +19,39 @@ public:
     explicit Buffer(std::initializer_list<Type> list) 
         : items_(list.size()),
           size_(list.size()), 
-          capacity_(list.size()) {
+          capacity_(list.size()),
+          begin_(items_.get()),
+          end_(items_.get() + list.size()) {
               std::copy(list.begin(), list.end(), begin());
         }
     
 public:
-    void push_front(Type&& value) {
-        if (size_ == capacity_) {
-            for (size_t i = size_ - 1; i > 0; --i) {
-                std::swap(items_[i], items_[i - 1]);
-            }
-            items_[0] = std::move(value);
-        }
-        else {
+    // push_front: complexity - O(1)
+    void push_front(const Type& value) {
+        if (size_ < capacity_) {
+            *(--begin_) = std::move(value);
             ++size_;
-            std::move(begin(), begin() + size(), begin() + 1);
-            *begin() = std::move(value);
-        }
-    }
-
-    void push_back(Type&& value) {
-        if (size_ == capacity_) {
-            for (int i = 0; i < size_ - 1; ++i) {
-                std::swap(items_[i], items_[i + 1]);
-            }
-            items_[size_ - 1] = std::move(value);
         }
         else {
-            items_[size_++] = std::move(value);
+            
         }
     }
 
+    // push_back: complexity - O(1)
+    void push_back(const Type& value) {
+        
+    }
+
+    // pop_front: complexity - O(1)
     void pop_front() {
-        std::move(begin() + 1, begin() + size(), begin());
-        --size_;
+        if (size_ > 0) {
+            ++begin_;
+            --size_;
+        }
     }
 
     bool empty() const {
-        return size() == 0;
+        return size_ == 0;
     }
 
     size_t size() const {
@@ -75,20 +70,21 @@ public:
         if (index >= size_) {
             throw std::invalid_argument("Wrong index!"); 
         }
-        return *(items_.get() + index);
+        return *(begin() + index);
     }
 
     Iterator begin() noexcept {
-        return items_.get();
+        return begin_;
     }
 
     Iterator end() noexcept {
-        return items_.get() + size_;
+        return end_;
     }
-
+    
 private:
     size_t size_;
     size_t capacity_;
-
     ArrayPtr<Type> items_;
+    Iterator begin_;
+    Iterator end_;
 };

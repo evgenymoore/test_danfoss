@@ -1,0 +1,39 @@
+void push_front(Type&& value) {
+        if (size_ == capacity_) {
+            for (size_t i = size_ - 1; i > 0; --i) {
+                std::swap(items_[i], items_[i - 1]);
+            }
+            items_[0] = std::move(value);
+        }
+        else {
+            ++size_;
+            std::move(begin(), begin() + size(), begin() + 1);
+            *begin() = std::move(value);
+        }
+    }
+
+    void push_back(Type&& value) {
+        if (size_ == capacity_) {
+            for (int i = 0; i < size_ - 1; ++i) {
+                std::swap(items_[i], items_[i + 1]);
+            }
+            items_[size_ - 1] = std::move(value);
+        }
+        else {
+            items_[size_++] = std::move(value);
+        }
+    }
+
+    void pop_front() {
+        std::move(begin() + 1, begin() + size(), begin());
+        --size_;
+    }
+    
+
+    Iterator begin() noexcept {
+        return items_.get();
+    }
+
+    Iterator end() noexcept {
+        return items_.get() + size_;
+    }
