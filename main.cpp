@@ -17,13 +17,26 @@ int main() {
 
     PrintBuffer(buffer);
 
-    buffer.pop_front();
-    buffer.pop_front();
-    buffer.pop_front();
-    buffer.pop_front();
+    buffer.clear();
+
+    PrintBuffer(buffer);
+
+    buffer.push_back(4);
+    PrintBuffer(buffer);
+    
+    buffer.push_front(3);
+    PrintBuffer(buffer);
+
+    buffer.push_front(2);
+    PrintBuffer(buffer);
+    
+    buffer.push_front(1);
     PrintBuffer(buffer);
 
     buffer.push_front(5);
+    PrintBuffer(buffer);
+
+    buffer.push_front(6);
     PrintBuffer(buffer);
 
 

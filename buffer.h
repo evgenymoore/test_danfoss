@@ -44,17 +44,15 @@ public:
               tail_(other.tail_) {}
     public:
         Iterator operator++() {
-            ++ptr_;
-            if (ptr_ == tail_ + 1) {
-                this->ptr_ = head_;
+            if (++ptr_ == tail_ + 1) {
+                ptr_ = head_;
             }
             return *this;
         }
 
         Iterator operator--() {
-            --ptr_;
-            if (ptr_ == head_ - 1) {
-                this->ptr_ = tail_;
+            if (--ptr_ == head_ - 1) {
+                ptr_ = tail_;
             }
             return *this;
         }
@@ -70,12 +68,10 @@ public:
         }
 
         bool operator==(const Iterator& other) {
-            //
             return ptr_ == other.ptr_;
         }
 
         bool operator!=(const Iterator& other) {
-            //
             return !(ptr_ == other.ptr_);
         }
     private:
@@ -85,7 +81,7 @@ public:
     };
 
 public:
-    // push_front: complexity - O(1)
+    // push_front(): complexity - O(1)
     void push_front(const Type& value) {
         if (is_full()) {
             auto position = end_;
@@ -100,7 +96,7 @@ public:
         }
     }
 
-    // push_back: complexity - O(1)
+    // push_back(): complexity - O(1)
     void push_back(const Type& value) {
         if (is_full()) {
             auto position = end_;
@@ -114,7 +110,7 @@ public:
         }
     }   
 
-    // pop_front: complexity - O(1)
+    // pop_front(): complexity - O(1)
     void pop_front() {
         if (!is_empty()) {
             ++begin_;
@@ -138,10 +134,11 @@ public:
         return capacity_;
     }
 
+    // clear(): complexity - O(1)
     void clear() {
         size_ = 0;
-        begin_(items_.get(), items_.get(), items_.get() + size);
-        end_(items_.get() + size, items_.get(), items_.get() + size);
+        //begin_ = ;
+        //end_ = ;
     }
 
     Iterator<Type> begin() noexcept {
