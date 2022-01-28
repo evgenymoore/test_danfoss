@@ -1,39 +1,34 @@
 #include <iostream>
 #include <cassert>
+#include <iterator>
 
 #include "buffer.h"
+
+template <typename Type>
+void PrintBuffer(Buffer<Type>& buffer) {
+    for (auto& value : buffer) {
+        std::cout << value << " ";
+    }
+    std::cout << std::endl;
+}
 
 int main() {
     Buffer<int> buffer ({1, 2, 3, 4});
 
-    for (auto& value : buffer) {
-        std::cout << value;
-    }
-    std::cout << std::endl;
+    PrintBuffer(buffer);
 
-    // while (!buffer.empty()) {
-    //     buffer.pop_front();
-    // }
+    buffer.pop_front();
+    buffer.pop_front();
+    buffer.pop_front();
+    buffer.pop_front();
+    PrintBuffer(buffer);
+
+    buffer.push_front(5);
+    PrintBuffer(buffer);
+
 
     // assert(buffer.size() == 0);
     // assert(buffer.begin() == buffer.end());
-
-    buffer.pop_front();
-    buffer.pop_front();
-    buffer.pop_front();
-    buffer.pop_front();
-    buffer.push_front(5);
-    buffer.push_front(4);
-    buffer.push_front(3);
-    buffer.push_front(2);
-    buffer.push_front(1);
-    // assert(buffer[0] = 5);
-    // assert(buffer[1] = 4);
-
-    for (auto& value : buffer) {
-        std::cout << value;
-    }
-    std::cout << std::endl;
 
     // // push_front() for size_ = capacity_
     // buffer.push_front(5);

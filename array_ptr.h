@@ -6,7 +6,7 @@ public:
     ArrayPtr() = default;
 
     explicit ArrayPtr(size_t size) {
-        size != 0 ? raw_ptr_ = new Type[size] : raw_ptr_;
+        (size != 0) ? (raw_ptr_ = new Type[size]) : raw_ptr_;
     }
 
     ~ArrayPtr() {
@@ -16,7 +16,7 @@ public:
     Type& operator[](size_t index) noexcept {
         return *(raw_ptr_ + index);
     }
-
+ 
     Type* get() const noexcept {
         return raw_ptr_;
     }
