@@ -38,7 +38,7 @@ public:
             : ptr_(ptr),
               head_(head),
               tail_(tail) {}
-        Iterator(const Iterator& other) 
+        Iterator(const Iterator<ValueType>& other) 
             : ptr_(other.ptr_),
               head_(other.head_),
               tail_(other.tail_) {}
@@ -67,13 +67,19 @@ public:
             return *ptr_;
         }
 
-        bool operator==(const Iterator& other) {
+        Iterator operator=(const Iterator& rhs) {
+            ptr_ = rhs.ptr_;
+            return *this;
+        }
+
+        bool operator==(const Iterator& other) const {
             return ptr_ == other.ptr_;
         }
 
-        bool operator!=(const Iterator& other) {
+        bool operator!=(const Iterator& other) const {
             return !(ptr_ == other.ptr_);
         }
+
     private:
         ValueType* ptr_ = nullptr;
         ValueType* head_ = nullptr;
@@ -137,8 +143,8 @@ public:
     // clear(): complexity - O(1)
     void clear() {
         size_ = 0;
-        //begin_ = ;
-        //end_ = ;
+        begin_ = items_.get();
+        end_ = items_.get() + size_;
     }
 
     Iterator<Type> begin() noexcept {

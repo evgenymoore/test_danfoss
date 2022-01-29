@@ -39,6 +39,16 @@ int main() {
     buffer.push_front(6);
     PrintBuffer(buffer);
 
+    buffer.clear();
+    buffer.clear();
+    buffer.clear();
+
+    PrintBuffer(buffer);
+
+    for (int i = 0; i < 10; ++i) {
+        buffer.push_front(i);
+        PrintBuffer(buffer);
+    }
 
     // assert(buffer.size() == 0);
     // assert(buffer.begin() == buffer.end());
