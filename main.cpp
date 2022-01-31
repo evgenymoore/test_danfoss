@@ -6,8 +6,13 @@
 
 template <typename Type>
 void PrintBuffer(Buffer<Type>& buffer) {
-    for (auto& value : buffer) {
-        std::cout << value << " ";
+    if (buffer.is_empty()) {
+        std::cout << "empty buffer";
+    }
+    else {
+        for (auto& value : buffer) {
+            std::cout << value << " ";
+        }
     }
     std::cout << std::endl;
 }
