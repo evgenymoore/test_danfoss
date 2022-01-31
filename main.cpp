@@ -23,7 +23,7 @@ int main() {
     assert(buffer.max_size() == 4);
     PrintBuffer(buffer);
 
-    // push_front() for size_ = capacity_
+    // push_front()
     buffer.push_front(5);
     assert(*buffer.begin() == 5);
     PrintBuffer(buffer);
