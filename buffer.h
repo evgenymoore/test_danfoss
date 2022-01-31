@@ -7,6 +7,14 @@
 
 #include "array_ptr.h"
 
+/* основная задача - добиться от методов класса Buffer<Type> алгоритмической 
+   сложности - O(1). Предлагается, вместо постоянного перезаписывания данных между
+   ячейками памями (сложность О(N), где N - размера буффера), использовать итераторы
+   для реализации вставки в начало буффера, вставки в конец буффера и удаления элемента
+   из начала буффера за константную сложность (О(1)). Для этого сделаем перегрузку 
+   operator++, operator-- итераторов, что позволит нам в случае выхода итератора за 
+   пределы буффера заставлять его ссылаться на начало или конец буффера ("закольцовывание")*/
+
 template <typename Type>
 class Buffer {
 public:
@@ -27,7 +35,7 @@ public:
 
 public:
     template <typename ValueType>
-    class Iterator : public std::iterator<std::forward_iterator_tag, ValueType> {
+    class Iterator : public std::iterator<std::bidirectional_iterator_tag, ValueType> {
     public:
         friend class Buffer;
     public:

@@ -1,5 +1,6 @@
 #pragma once 
 
+// smart pointer
 template <typename Type>
 class ArrayPtr{
 public:
@@ -11,10 +12,6 @@ public:
 
     ~ArrayPtr() {
         delete[] raw_ptr_;
-    }
-
-    Type& operator[](size_t index) noexcept {
-        return *(raw_ptr_ + index);
     }
  
     Type* get() const noexcept {
