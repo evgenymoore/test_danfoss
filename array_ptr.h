@@ -1,6 +1,5 @@
 #pragma once 
 
-// smart pointer
 template <typename Type>
 class ArrayPtr{
 public:
